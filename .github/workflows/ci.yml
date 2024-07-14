@@ -9,9 +9,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        app: [mongodb]
         os: [ubuntu-latest, windows-latest, macos-latest]
         node-version: [18.x, 20.x, 21.x, 22.x]
-        app: [mongodb]
     runs-on: ${{ matrix.os }}
 
     steps:
