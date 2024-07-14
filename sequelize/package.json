@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test": "isATest=true jest",
+    "test": "jest",
     "start": "node server.js"
   },
   "dependencies": {
