@@ -1,16 +1,17 @@
-name: Test app
+name: Test apps
 
 on:
   push:
     branches: [main]
 
 jobs:
-  test:
+  test-apps:
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
         node-version: [18.x, 20.x, 21.x, 22.x]
+        app: [mongodb]
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -23,7 +24,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install packages
-        run: npm ci
+        run: cd ${{ matrix.app }} && npm ci
 
       - name: Run Tests
-        run: npm test
+        run: cd ${{ matrix.app }} && npm test
