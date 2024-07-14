@@ -11,7 +11,6 @@ function createUser(req, res) {
 
 function getUsers(req, res) {
   User.find({}).lean().then(users => {
-    console.error(users[0]._id.buffer)
     res.json(users)
   }).catch(error => {
     console.error(error)
