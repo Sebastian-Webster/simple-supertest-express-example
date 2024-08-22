@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        app: [mongodb, sequelize]
+        app: [mongodb, sequelize, mysql]
         os: [ubuntu-latest, windows-latest, macos-latest]
         node-version: [18.x, 20.x, 21.x, 22.x]
     runs-on: ${{ matrix.os }}
