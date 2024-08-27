@@ -1,22 +1,36 @@
 const supertest = require('supertest')
-const app = require('../app')
+const {expect, beforeAll, afterEach, afterAll} = require('@jest/globals');
+const { createDB } = require('mysql-memory-server');
+const mysql = require('mysql2/promise')
 
-const User = require('../models/User.js')
+let db;
+let connection;
 
-const {expect, beforeAll, afterEach, afterAll} = require('@jest/globals')
-
-const dbConnection = require('../config/db')
+jest.setTimeout(100_000)
 
 beforeAll(async () => {
-  await User.sync();
+  db = await createDB()
+  connection = await mysql.createConnection({
+    database: db.dbName,
+    port: db.port,
+    host: '127.0.0.1',
+    user: db.username
+  })
+  process.env.DB_NAME = db.dbName
+  process.env.DB_USER = db.username
+  process.env.DB_PASSWORD = ''
+  process.env.DB_HOST = '127.0.0.1'
+  process.env.DB_PORT = db.port
 })
 
 afterEach(async () => {
-  await User.destroy({truncate: true})
+  await connection.query('DROP DATABASE dbdata;')
+  await connection.query('CREATE DATABASE dbdata;')
 })
 
 afterAll(async () => {
-  await dbConnection.close()
+  await connection.close();
+  await db.stop();
 })
 
 const userToCreate = {
@@ -27,6 +41,10 @@ const userToCreate = {
 
 describe('User Route Tests', () => {
   test('Getting all users', async () => {
+    const app = require('../app')
+    const User = require('../models/User')
+    await User.sync()
+
     await User.create(userToCreate)
 
     const expecting = await User.findAll({raw: true})
@@ -42,6 +60,10 @@ describe('User Route Tests', () => {
   })
 
   test('Creating a user', async () => {
+    const app = require('../app')
+    const User = require('../models/User')
+    await User.sync()
+
     await supertest(app)
     .post('/')
     .send(userToCreate)
@@ -58,6 +80,10 @@ describe('User Route Tests', () => {
   })
 
   test('Updating a user', async () => {
+    const app = require('../app')
+    const User = require('../models/User')
+    await User.sync()
+
     await User.create(userToCreate)
 
     const newUser = await User.findOne({raw: true})
@@ -75,6 +101,10 @@ describe('User Route Tests', () => {
   })
 
   test('Deleting a user', async () => {
+    const app = require('../app')
+    const User = require('../models/User')
+    await User.sync()
+
     const user = await User.create(userToCreate)
 
     await supertest(app)
