@@ -13,16 +13,18 @@ let db;
 let connection;
 
 beforeAll(async () => {
-  db = await createDB({
-    port: 3310,
-    logLevel: 'LOG'
-  })
+  db = await createDB()
   connection = await sql.createConnection({
     host: '127.0.0.1',
     user: db.username,
     port: db.port,
     database: db.dbName
   })
+  process.env.host = '127.0.0.1';
+  process.env.user = db.username;
+  process.env.port = db.port;
+  process.env.password = '';
+  process.env.database_name = db.dbName;
 })
 
 afterEach(async () => {
