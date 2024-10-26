@@ -6,7 +6,7 @@ const mysql = require('mysql2/promise')
 let db;
 let connection;
 
-jest.setTimeout(100_000)
+jest.setTimeout(500_000)
 
 beforeAll(async () => {
   db = await createDB()

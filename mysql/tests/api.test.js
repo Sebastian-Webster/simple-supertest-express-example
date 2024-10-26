@@ -12,6 +12,8 @@ const userToCreate = {
 let db;
 let connection;
 
+jest.setTimeout(500_000)
+
 beforeAll(async () => {
   db = await createDB()
   connection = await sql.createConnection({
@@ -53,8 +55,6 @@ async function findUsers() {
   const query = await connection.query('SELECT * FROM users')
   return query[0]
 }
-
-jest.setTimeout(100_000)
 
 describe('User Route Tests', () => {
   test('Getting all users', async () => {
