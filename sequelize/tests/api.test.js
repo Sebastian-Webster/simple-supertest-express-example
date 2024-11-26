@@ -9,7 +9,9 @@ let connection;
 jest.setTimeout(500_000)
 
 beforeAll(async () => {
-  db = await createDB()
+  db = await createDB({
+    ignoreUnsupportedSystemVersion: true
+  })
   connection = await mysql.createConnection({
     database: db.dbName,
     port: db.port,

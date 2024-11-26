@@ -15,7 +15,9 @@ let connection;
 jest.setTimeout(500_000)
 
 beforeAll(async () => {
-  db = await createDB()
+  db = await createDB({
+    ignoreUnsupportedSystemVersion: true
+  })
   connection = await sql.createConnection({
     host: '127.0.0.1',
     user: db.username,
