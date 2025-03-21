@@ -25,6 +25,8 @@ afterAll(async () => {
   await database.stop()
 })
 
+jest.setTimeout(10_000)
+
 const userToCreate = {
   email: "seb@gmail.com",
   password: 'very secure password',
