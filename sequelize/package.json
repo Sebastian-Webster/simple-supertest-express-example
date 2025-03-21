@@ -11,6 +11,6 @@
     "mysql-memory-server": "^1.9.0",
     "mysql2": "^3.13.0",
     "sequelize": "^6.37.6",
-    "supertest": "^7.0.0"
+    "supertest": "^7.1.0"
   }
 }
