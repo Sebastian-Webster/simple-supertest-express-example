@@ -5,6 +5,7 @@ const mysql = require('mysql2/promise')
 
 let db;
 let connection;
+let app;
 
 jest.setTimeout(500_000)
 
@@ -23,11 +24,11 @@ beforeAll(async () => {
   process.env.DB_PASSWORD = ''
   process.env.DB_HOST = '127.0.0.1'
   process.env.DB_PORT = db.port
+  app = require('../app')
 })
 
 afterEach(async () => {
-  await connection.query('DROP DATABASE dbdata;')
-  await connection.query('CREATE DATABASE dbdata;')
+  await connection.query('TRUNCATE TABLE users;')
 })
 
 afterAll(async () => {
@@ -43,7 +44,6 @@ const userToCreate = {
 
 describe('User Route Tests', () => {
   test('Getting all users', async () => {
-    const app = require('../app')
     const User = require('../models/User')
     await User.sync()
 
@@ -62,7 +62,6 @@ describe('User Route Tests', () => {
   })
 
   test('Creating a user', async () => {
-    const app = require('../app')
     const User = require('../models/User')
     await User.sync()
 
@@ -82,7 +81,6 @@ describe('User Route Tests', () => {
   })
 
   test('Updating a user', async () => {
-    const app = require('../app')
     const User = require('../models/User')
     await User.sync()
 
@@ -103,7 +101,6 @@ describe('User Route Tests', () => {
   })
 
   test('Deleting a user', async () => {
-    const app = require('../app')
     const User = require('../models/User')
     await User.sync()
 
