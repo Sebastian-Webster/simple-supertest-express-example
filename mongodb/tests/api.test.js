@@ -9,8 +9,11 @@ let database;
 
 const {expect, beforeAll, afterEach, afterAll} = require('@jest/globals')
 
+//MongoDB does not support Windows on ARM yet. If you are using Windows on ARM, the x64 version of MySQL gets used instead.
+const arch = process.arch === 'x64' || (process.platform === 'win32' && process.arch === 'arm64') ? 'x64' : 'arm64';
+
 beforeAll(async () => {
-  database = await MongoMemoryServer.create();
+  database = await MongoMemoryServer.create({binary: {arch}});
   const uri = database.getUri();
   console.log(uri)
   await mongoose.connect(uri)
@@ -25,7 +28,7 @@ afterAll(async () => {
   await database.stop()
 })
 
-jest.setTimeout(10_000)
+jest.setTimeout(500_000)
 
 const userToCreate = {
   email: "seb@gmail.com",

@@ -6,16 +6,28 @@ on:
   workflow_dispatch:
 
 jobs:
-  test-apps:
+  mongodb:
+    defaults:
+      run:
+        working-directory: mongodb
+    
     strategy:
       fail-fast: false
       matrix:
-        app: [mongodb, sequelize, mysql]
-        os: [ubuntu-22.04, ubuntu-24.04, ubuntu-24.04-arm, windows-2019, windows-2022, macos-13, macos-14, macos-15]
+        os: [ubuntu-22.04, ubuntu-24.04, ubuntu-24.04-arm, windows-11-arm, windows-2019, windows-2022, windows-2025, macos-13, macos-14, macos-15]
         node-version: [16.9.0, 16.x, 17.0.0, 17.x, 18.x, 19.x, 20.x, 21.x, 22.x, 23.x]
+        #Node.js does not support Windows on ARM until 19.x
         exclude:
-          - app: mongodb
-            node-version: 16.6.0
+          - node-version: 16.9.0
+            os: windows-11-arm
+          - node-version: 16.x
+            os: windows-11-arm
+          - node-version: 17.0.0
+            os: windows-11-arm
+          - node-version: 17.x
+            os: windows-11-arm
+          - node-version: 18.x
+            os: windows-11-arm
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -28,7 +40,85 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install packages
-        run: cd ${{ matrix.app }} && npm ci
+        run: npm ci
 
       - name: Run Tests
-        run: cd ${{ matrix.app }} && npm test
+        run: npm test
+
+  sequelize:
+    defaults:
+      run:
+        working-directory: sequelize
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-22.04, ubuntu-24.04, ubuntu-24.04-arm, windows-11-arm, windows-2019, windows-2022, macos-13, macos-14, macos-15]
+        node-version: [16.9.0, 16.x, 17.0.0, 17.x, 18.x, 19.x, 20.x, 21.x, 22.x, 23.x]
+        #Node.js does not support Windows on ARM until 19.x
+        exclude:
+          - node-version: 16.9.0
+            os: windows-11-arm
+          - node-version: 16.x
+            os: windows-11-arm
+          - node-version: 17.0.0
+            os: windows-11-arm
+          - node-version: 17.x
+            os: windows-11-arm
+          - node-version: 18.x
+            os: windows-11-arm
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install packages
+        run: npm ci
+
+      - name: Run Tests
+        run: npm test
+
+  mysql:
+    defaults:
+      run:
+        working-directory: mysql
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-22.04, ubuntu-24.04, ubuntu-24.04-arm, windows-11-arm, windows-2019, windows-2022, macos-13, macos-14, macos-15]
+        node-version: [16.9.0, 16.x, 17.0.0, 17.x, 18.x, 19.x, 20.x, 21.x, 22.x, 23.x]
+        #Node.js does not support Windows on ARM until 19.x
+        exclude:
+          - node-version: 16.9.0
+            os: windows-11-arm
+          - node-version: 16.x
+            os: windows-11-arm
+          - node-version: 17.0.0
+            os: windows-11-arm
+          - node-version: 17.x
+            os: windows-11-arm
+          - node-version: 18.x
+            os: windows-11-arm
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install packages
+        run: npm ci
+
+      - name: Run Tests
+        run: npm test

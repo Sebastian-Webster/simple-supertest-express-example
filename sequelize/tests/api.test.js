@@ -9,9 +9,13 @@ let app;
 
 jest.setTimeout(500_000)
 
+//MySQL does not support Windows on ARM yet. If you are using Windows on ARM, the x64 version of MySQL gets used instead.
+const arch = process.arch === 'x64' || (process.platform === 'win32' && process.arch === 'arm64') ? 'x64' : 'arm64';
+
 beforeAll(async () => {
   db = await createDB({
-    ignoreUnsupportedSystemVersion: true
+    ignoreUnsupportedSystemVersion: true,
+    arch
   })
   connection = await mysql.createConnection({
     database: db.dbName,
