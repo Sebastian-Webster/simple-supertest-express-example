@@ -11,5 +11,7 @@ updates:
       - "/mysql"
       - "/sequelize"
     schedule:
-      interval: "daily"
+      interval: "cron"
+      cronjob: 0 5 * * *
+      timezone: Asia/Dubai
     open-pull-requests-limit: 999
