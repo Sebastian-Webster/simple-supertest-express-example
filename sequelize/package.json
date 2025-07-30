@@ -9,7 +9,7 @@
     "express": "^5.1.0",
     "jest": "^30.0.5",
     "mysql-memory-server": "^1.11.0",
-    "mysql2": "^3.14.2",
+    "mysql2": "^3.14.3",
     "sequelize": "^6.37.7",
     "supertest": "^7.1.4"
   }
