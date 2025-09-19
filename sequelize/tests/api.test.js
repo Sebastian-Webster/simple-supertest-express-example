@@ -15,7 +15,8 @@ const arch = process.arch === 'x64' || (process.platform === 'win32' && process.
 beforeAll(async () => {
   db = await createDB({
     ignoreUnsupportedSystemVersion: true,
-    arch
+    arch,
+    logLevel: "LOG"
   })
   connection = await mysql.createConnection({
     database: db.dbName,
