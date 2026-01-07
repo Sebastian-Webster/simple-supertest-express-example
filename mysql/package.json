@@ -10,6 +10,6 @@
     "jest": "^30.2.0",
     "mysql-memory-server": "^1.13.0",
     "mysql2": "^3.16.0",
-    "supertest": "^7.1.4"
+    "supertest": "^7.2.2"
   }
 }
