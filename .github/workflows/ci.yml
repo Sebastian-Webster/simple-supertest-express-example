@@ -65,7 +65,7 @@ jobs:
       - name: Install packages
         run: npm ci
 
-      - name: Install required packages (Ubuntu Slim only)
+      - name: Install required system packages (Ubuntu Slim only)
         if: ${{ matrix.os == 'ubuntu-slim' }}
         run: sudo apt-get update && sudo apt-get install libaio1t64 libnuma-dev
 
@@ -100,7 +100,7 @@ jobs:
       - name: Install packages
         run: npm ci
 
-      - name: Install required packages (Ubuntu Slim only)
+      - name: Install required system packages (Ubuntu Slim only)
         if: ${{ matrix.os == 'ubuntu-slim' }}
         run: sudo apt-get update && sudo apt-get install libaio1t64 libnuma-dev
 
