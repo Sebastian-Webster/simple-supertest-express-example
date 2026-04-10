@@ -9,7 +9,7 @@
     "express": "^5.2.1",
     "jest": "^30.3.0",
     "mysql-memory-server": "^1.14.1",
-    "mysql2": "^3.20.0",
+    "mysql2": "^3.21.1",
     "supertest": "^7.2.2"
   }
 }
