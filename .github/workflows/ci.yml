@@ -15,11 +15,8 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-22.04, ubuntu-24.04, ubuntu-22.04-arm, ubuntu-24.04-arm, macos-14, macos-15, macos-15-intel, macos-26, ubuntu-slim]
-        node-version: [18.x, 19.x, 20.x, 21.x, 22.x, 23.x, 24.x, 25.x]
-        #Node.js does not support Windows on ARM until 19.x
-        exclude:
-          - node-version: 18.x
-            os: windows-11-arm
+        # MongoDB testing does not use Node.js 18.x as mongodb-memory-server requires global "crypto" object
+        node-version: [19.x, 20.x, 21.x, 22.x, 23.x, 24.x, 25.x]
     runs-on: ${{ matrix.os }}
 
     steps:
