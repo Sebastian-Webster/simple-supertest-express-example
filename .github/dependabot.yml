@@ -14,4 +14,7 @@ updates:
       interval: "cron"
       cronjob: 0 5 * * *
       timezone: Asia/Dubai
+    cooldown:
+      exclude:
+        - mysql-memory-server
     open-pull-requests-limit: 999
