@@ -16,7 +16,8 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
         # MongoDB testing does not use Node.js 18.x as mongodb-memory-server requires global "crypto" object
-        node-version: [19.x, 20.x, 21.x, 22.x, 23.x, 24.x, 25.x]
+        # MongoDB testing does not use Node.js 19.x as Jest >=30.5.0 breaks on Node 19.x with error: Module /home/runner/work/simple-supertest-express-example/simple-supertest-express-example/sequelize/node_modules/jest-circus/build/runner.js in the testRunner option was not found. <rootDir> is: /home/runner/work/simple-supertest-express-example/simple-supertest-express-example/sequelize
+        node-version: [20.x, 21.x, 22.x, 23.x, 24.x, 25.x]
     runs-on: ${{ matrix.os }}
 
     steps:
