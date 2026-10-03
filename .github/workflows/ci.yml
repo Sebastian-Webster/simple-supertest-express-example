@@ -45,11 +45,26 @@ jobs:
         os: [ubuntu-22.04, ubuntu-24.04, ubuntu-26.04, ubuntu-22.04-arm, ubuntu-24.04-arm, ubuntu-26.04-arm, windows-11-arm, windows-11-vs2026-arm, windows-2022, windows-2025, macos-14, macos-15, macos-15-intel, macos-26, macos-26-intel, xcode-27, ubuntu-slim, windows-2025-vs2026]
         node-version: [18.x, 19.x, 20.x, 21.x, 22.x, 23.x, 24.x, 25.x, 26.x]
         #Node.js does not support Windows on ARM until 19.x
+        #Jest >=30.5.0 does not work on Ubuntu with Node 26: Module /home/runner/work/simple-supertest-express-example/simple-supertest-express-example/sequelize/node_modules/jest-circus/build/runner.js in the testRunner option was not found. <rootDir> is: /home/runner/work/simple-supertest-express-example/simple-supertest-express-example/sequelize
         exclude:
           - node-version: 18.x
             os: windows-11-arm
           - node-version: 18.x
             os: windows-11-vs2026-arm
+          - node-version: 19.x
+            os: ubuntu-22.04
+          - node-version: 19.x
+            os: ubuntu-24.04
+          - node-version: 19.x
+            os: ubuntu-26.04
+          - node-version: 19.x
+            os: ubuntu-22.04-arm
+          - node-version: 19.x
+            os: ubuntu-24.04-arm
+          - node-version: 19.x
+            os: ubuntu-26.04-arm
+          - node-version: 19.x
+            os: ubuntu-slim
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -82,11 +97,26 @@ jobs:
         os: [ubuntu-22.04, ubuntu-24.04, ubuntu-26.04, ubuntu-22.04-arm, ubuntu-24.04-arm, ubuntu-26.04-arm, windows-11-arm, windows-11-vs2026-arm, windows-2022, windows-2025, macos-14, macos-15, macos-15-intel, macos-26, macos-26-intel, xcode-27, ubuntu-slim, windows-2025-vs2026]
         node-version: [18.x, 19.x, 20.x, 21.x, 22.x, 23.x, 24.x, 25.x, 26.x]
         #Node.js does not support Windows on ARM until 19.x
+        #Jest >=30.5.0 does not work on Ubuntu with Node 26: Module /home/runner/work/simple-supertest-express-example/simple-supertest-express-example/sequelize/node_modules/jest-circus/build/runner.js in the testRunner option was not found. <rootDir> is: /home/runner/work/simple-supertest-express-example/simple-supertest-express-example/sequelize
         exclude:
           - node-version: 18.x
             os: windows-11-arm
           - node-version: 18.x
             os: windows-11-vs2026-arm
+          - node-version: 19.x
+            os: ubuntu-22.04
+          - node-version: 19.x
+            os: ubuntu-24.04
+          - node-version: 19.x
+            os: ubuntu-26.04
+          - node-version: 19.x
+            os: ubuntu-22.04-arm
+          - node-version: 19.x
+            os: ubuntu-24.04-arm
+          - node-version: 19.x
+            os: ubuntu-26.04-arm
+          - node-version: 19.x
+            os: ubuntu-slim
     runs-on: ${{ matrix.os }}
 
     steps:
